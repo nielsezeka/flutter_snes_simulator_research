@@ -1,7 +1,16 @@
 
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+
 body {
+  margin: 0px;
+  min-width: 100%;
+  height: 100%;
+  background-color: black;
   text-align: center;
-  background-color: #efefef;
 }
 
 pre {
@@ -14,7 +23,7 @@ pre {
   max-height: 200px;
   min-height: 200px;
   overflow: scroll;
-  text-align: left;
+  text-align: center;
   /* width: 512px; */
   /* for easier reading of the tracelog */
   width: 1000px;
@@ -24,8 +33,8 @@ pre {
 }
 
 #output {
-  width: 512px;
-  height: 480px;
+  height: 100%;
+  object-fit: contain;
   image-rendering: crisp-edges;
   image-rendering: pixelated;
 }

@@ -29,9 +29,6 @@ class _SnesJSWidgetState extends State<SnesJSWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('InAppLocalhostServer Example'),
-      ),
       body: Container(
         color: Colors.red,
         child: Column(

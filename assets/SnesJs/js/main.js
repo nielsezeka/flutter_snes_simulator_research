@@ -274,8 +274,8 @@ window.onkeyup = function(e) {
 }
 
 function log(text) {
-  el("log").innerHTML += text + "\n";
-  el("log").scrollTop = el("log").scrollHeight;
+  // el("log").innerHTML += text + "\n";
+  // el("log").scrollTop = el("log").scrollHeight;
 }
 
 function getByteRep(val) {
