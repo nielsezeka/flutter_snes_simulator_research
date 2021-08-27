@@ -91,8 +91,8 @@ let controlsP1 = {
 //   freader.readAsArrayBuffer(e.target.files[0]);
 // }
 
-test = async function() {
-  var rawFile = await fetch('https://nielsezeka.github.io/data/Super_Mario_World.smc');
+test = async function(link) {
+  var rawFile = await fetch(link);//'https://nielsezeka.github.io/data/Super_Mario_World.smc');
   var file = new File([await rawFile.blob()], 'Super_Mario_World.smc');
   let freader = new FileReader();
   freader.onload = function() {
@@ -144,7 +144,11 @@ test = async function() {
   
   freader.readAsArrayBuffer(file);
 }
-test()
+
+
+var urlOfGame = location.search.split('gameURL=')[1];
+console.log(urlOfGame)
+test(urlOfGame)
 
 // change the button click to a function for later use
 //el("pause").onclick = function() {

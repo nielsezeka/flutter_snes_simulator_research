@@ -44,9 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: SnesJSWidget(),
-    ) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+      body: Center(
+        child: SnesJSWidget(
+          urlOfGame: 'https://nielsezeka.github.io/data/Super_Mario_World.smc',
+        ),
+      ),
+    );
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class SnesJSWidget extends StatefulWidget {
-  const SnesJSWidget({Key? key}) : super(key: key);
+  final String urlOfGame;
+  const SnesJSWidget({Key? key, required this.urlOfGame}) : super(key: key);
 
   @override
   _SnesJSWidgetState createState() => _SnesJSWidgetState();
@@ -37,7 +38,7 @@ class _SnesJSWidgetState extends State<SnesJSWidget> {
               child: InAppWebView(
                 initialUrlRequest: URLRequest(
                   url: Uri.parse(
-                      "http://localhost:8080/assets/SnesJs/index.html"),
+                      "http://localhost:8080/assets/SnesJs/index.html?gameURL=${widget.urlOfGame}"),
                 ),
                 initialOptions: options,
                 onWebViewCreated: (controller) {},
@@ -51,3 +52,4 @@ class _SnesJSWidgetState extends State<SnesJSWidget> {
     );
   }
 }
+///file:///C:/Users/Na%20Ngo/Desktop/current_project/snes_snimulator_flutter/assets/SnesJs/index.html?gameURL=https://nielsezeka.github.io/data/Super_Mario_World.smc
