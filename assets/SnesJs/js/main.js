@@ -270,6 +270,17 @@ window.onkeydown = function(e) {
   }
 }
 
+pressDown = function(key) {
+  console.log('javascript: ' + key);
+  console.log('javascript: ' + typeof key);
+  snes.setPad1ButtonPressed(key);
+}
+
+releaseUp = function(key) {
+  snes.setPad1ButtonReleased(key);
+}
+
+
 window.onkeyup = function(e) {
   if(controlsP1[e.key.toLowerCase()] !== undefined) {
     e.preventDefault();
