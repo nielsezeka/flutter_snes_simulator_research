@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class SnesJSWidget extends StatefulWidget {
   final String urlOfGame;
-  const SnesJSWidget({Key? key, required this.urlOfGame}) : super(key: key);
+  ValueChanged<InAppWebViewController> controllerCompleted;
+  SnesJSWidget(
+      {Key? key, required this.urlOfGame, required this.controllerCompleted})
+      : super(key: key);
 
   @override
   _SnesJSWidgetState createState() => _SnesJSWidgetState();
@@ -29,24 +33,22 @@ class _SnesJSWidgetState extends State<SnesJSWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.red,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: InAppWebView(
-                initialUrlRequest: URLRequest(
-                  url: Uri.parse(
-                      "http://localhost:8080/assets/SnesJs/index.html?gameURL=${widget.urlOfGame}"),
-                ),
-                initialOptions: options,
-                onWebViewCreated: (controller) {},
-                onLoadStart: (controller, url) {},
-                onLoadStop: (controller, url) {},
-              ),
-            )
-          ],
+    return Container(
+      child: Center(
+        child: AspectRatio(
+          aspectRatio: 540 / 480,
+          child: InAppWebView(
+            initialUrlRequest: URLRequest(
+              url: Uri.parse(
+                  "http://localhost:8080/assets/SnesJs/index.html?gameURL=${widget.urlOfGame}"),
+            ),
+            initialOptions: options,
+            onWebViewCreated: (controller) {},
+            onLoadStart: (controller, url) {},
+            onLoadStop: (controller, url) {
+              widget.controllerCompleted(controller);
+            },
+          ),
         ),
       ),
     );
