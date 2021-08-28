@@ -15,7 +15,7 @@ Tested with android simulator blue stack(v5) and ios simulator
 
 ## Screen shoots:
 
-<img src="/screen_shoot/ip1.png?raw=true" width="400" height="185" />   <img src="/screen_shoot/ip2.png?raw=true" width="200" height="185" />  
+<img src="/screen_shoot/ip1.png?raw=true" width="400" height="185" /> <br>  <img src="/screen_shoot/ip2.png?raw=true" width="400" height="185" />  
 
 ## Technical notes
 
