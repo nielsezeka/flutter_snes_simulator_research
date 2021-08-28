@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:snes_snimulator_flutter/snes_js_widget/snes_screen/snes_js_widget.dart';
+import 'package:snes_snimulator_flutter/snes_js_widget/snes_game_pad/snes_left_pad_default/snes_left_pad_default.dart';
+import 'package:snes_snimulator_flutter/snes_js_widget/snes_game_pad/snes_right_pad_default/snes_right_pad_default.dart';
 import 'package:snes_snimulator_flutter/snes_js_widget/snes_machine.dart';
 
 final InAppLocalhostServer localhostServer = new InAppLocalhostServer();
@@ -17,6 +17,10 @@ void main() async {
   if (Platform.isAndroid) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+  ]);
   runApp(MyApp());
 }
 
@@ -49,7 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox.expand(
-        child: SnesMachine.defaultSnes(),
+        child: SafeArea(
+          child: SnesMachine(
+            leftDpad: SnesLeftPadDefault(),
+            rightDpad: SnesRightPadDefault(),
+            linkToRoom:
+                'https://nielsezeka.github.io/data/Super_Mario_World.smc',
+          ),
+
+          // SnesMachine.defaultSnes(
+          //   linkToRoom:
+          //       'https://nielsezeka.github.io/data/Super_Mario_World.smc',
+          // ),
+        ),
       ),
     );
   }

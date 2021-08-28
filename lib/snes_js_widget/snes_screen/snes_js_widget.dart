@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:snes_snimulator_flutter/snes_js_widget/snes_game_pad/snes_buttons/snes_control_arrow_buttons.dart';
 
 enum DpadKey {
   selectKey, //keycode 2
   startKey, //key code 3
   upKey,
-  downKet,
+  downKey,
   leftKey,
   rightKey,
   lKey,
   rKey,
   bKey,
-  yKey,
+  yKey, // keycode 1
   aKey,
   xKey,
 }
@@ -20,10 +21,30 @@ enum DpadKey {
 extension ToKeyCode on DpadKey {
   int toSnesKeyCode() {
     switch (this) {
+      case DpadKey.bKey:
+        return 0;
+      case DpadKey.yKey:
+        return 1;
       case DpadKey.selectKey:
         return 2;
       case DpadKey.startKey:
         return 3;
+      case DpadKey.upKey:
+        return 4;
+      case DpadKey.downKey:
+        return 5;
+      case DpadKey.leftKey:
+        return 6;
+      case DpadKey.rightKey:
+        return 7;
+      case DpadKey.aKey:
+        return 8;
+      case DpadKey.xKey:
+        return 9;
+      case DpadKey.lKey:
+        return 10;
+      case DpadKey.rKey:
+        return 11;
       default:
     }
     return -1;
@@ -38,29 +59,38 @@ class DpadController {
 
   void pauseOrResumeSnes() {
     checkSnesController();
-    _webController?.callAsyncJavaScript(functionBody: "pauseGame();");
+    _webController?.callAsyncJavaScript(
+      functionBody: "pauseGame();",
+    );
   }
 
-  void pressKey(DpadKey key) {
+  void pressKey(DpadKey key, {bool withAutoRelease = true}) {
     checkSnesController();
-    print("pressDown(${key.toSnesKeyCode()});");
     _webController?.callAsyncJavaScript(
-        functionBody: "pressDown(${key.toSnesKeyCode()});");
-    Future.delayed(Duration(milliseconds: 200), () {
-      releaseKey(key);
-    });
+      functionBody: "pressDown(${key.toSnesKeyCode()});",
+    );
+    if (withAutoRelease) {
+      Future.delayed(
+        Duration(milliseconds: 200),
+        () {
+          releaseKey(key);
+        },
+      );
+    }
   }
 
   void releaseKey(DpadKey key) {
     checkSnesController();
-    print("releaseUp(${key.toSnesKeyCode()});");
     _webController?.callAsyncJavaScript(
-        functionBody: "releaseUp(${key.toSnesKeyCode()});");
+      functionBody: "releaseUp(${key.toSnesKeyCode()});",
+    );
   }
 
   void checkSnesController() {
     if (_webController == null) {
-      print("[SNES][ERROR]: the controller is not ready!!!");
+      print(
+        "[SNES][ERROR]: the controller is not ready!!!",
+      );
     }
   }
 }
@@ -113,9 +143,7 @@ class _SnesJSWidgetState extends State<SnesJSWidget> {
               controllerOfSnes.setActivedWebController(controller);
               widget.controllerCompleted(controllerOfSnes);
             },
-            onConsoleMessage: (controller, messase) {
-              print(messase);
-            },
+            onConsoleMessage: (controller, messase) {},
           ),
         ),
       ),

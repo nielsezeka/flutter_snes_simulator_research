@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snes_snimulator_flutter/snes_js_widget/snes_game_pad/snes_buttons/snes_control_arrow_buttons.dart';
+import 'package:snes_snimulator_flutter/snes_js_widget/snes_game_pad/snes_buttons/snes_long_button.dart';
 import 'package:snes_snimulator_flutter/snes_js_widget/snes_screen/snes_js_widget.dart';
 import '../snes_game_pad.dart';
 
@@ -18,34 +20,48 @@ class _SnesLeftPadDefaultState extends State<SnesLeftPadDefault> {
         Row(
           children: [
             Expanded(
-              child: Container(
-                color: Colors.amber,
-                child: CupertinoButton(
-                  child: Container(
-                    height: 50,
-                  ),
-                  onPressed: () {
-                    SnesController.of(context).controller?.pauseOrResumeSnes();
-                  },
-                ),
+              child: SnesLongButton(
+                label: 'Pause',
+                onPressed: () {
+                  SnesController.of(context).controller?.pauseOrResumeSnes();
+                },
               ),
             ),
+            Padding(padding: EdgeInsets.all(5)),
             Expanded(
-              child: Container(
-                color: Colors.green,
-                child: CupertinoButton(
-                  child: Container(
-                    height: 50,
-                  ),
-                  onPressed: () {
-                    SnesController.of(context)
-                        .controller
-                        ?.pressKey(DpadKey.selectKey);
-                  },
-                ),
+              child: SnesLongButton(
+                label: 'Select',
+                onPressed: () {
+                  SnesController.of(context)
+                      .controller
+                      ?.pressKey(DpadKey.selectKey);
+                },
               ),
             ),
           ],
+        ),
+        Spacer(),
+        Container(
+          width: double.infinity,
+          height: 200,
+          child: SnesControlArrowButtons(
+            onChangedButtons: (newState) {
+              final key =
+                  SnesControlArrowButtons.fromArrowKeyOfPad(newState.key);
+              if (key != null) {
+                if (newState.isPressed) {
+                  SnesController.of(context).controller?.pressKey(
+                        key,
+                        withAutoRelease: false,
+                      );
+                } else {
+                  SnesController.of(context).controller?.releaseKey(
+                        key,
+                      );
+                }
+              }
+            },
+          ),
         ),
       ],
     );
