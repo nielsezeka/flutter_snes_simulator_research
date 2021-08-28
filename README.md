@@ -1,6 +1,6 @@
 # SNES snimulator flutter
 
-A new Flutter project.
+Snes simulator for flutter dart.
 
 ## Sumary
 
@@ -58,9 +58,11 @@ SnesController.of(context).controller?.releaseKey(
                       );
 ```
 
-Please note that `pressKey` will release after some short delay to simulate the click, all the buttons (left, right, top, bottom) is not auto release so please to put the var `withAutoRelease` is false for this.   
+Please note that `pressKey` will release after some short delay by default to simulate the click. But all the buttons (left, right, top, bottom) is not auto release so please to put the var `withAutoRelease` is false when you using `pressKey` for arrows.   
 
 3. As my mention, this project is wrapper around the snesJS, I try to use `flutter_inappwebview` in order to make it work, so any specific issues / errors you should chek their repo first 
 
 
-Feel free to use this code, is just want to make some funny code for my researching purpose. If you like it just buy me a coffee :v 
+The same technique can be applied for others simulator which existed in js
+
+Feel free to use this code, is just want to make some funny code for my researching purpose. If you like it just drop a star for me!
