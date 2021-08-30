@@ -1,4 +1,4 @@
-# SNES snimulator flutter
+# SNES Emulator flutter
 
 Snes simulator for flutter dart.
 
